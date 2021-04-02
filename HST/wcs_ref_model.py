@@ -27,8 +27,8 @@ class WFC3IRGrismModel(ReferenceFileModel):
           HST Grism orders, matched to the array locations of the
           dispersion models
     """
-    schema_url = "asdf://stsci.edu/grismstuff/specwcs_wfc3ir_grism.schema"
-    #schema_url = "http://stsci.edu/schemas/asdf/core/asdf-1.1.0"
+    #schema_url = "asdf://stsci.edu/grismstuff/specwcs_wfc3ir_grism.schema"
+    schema_url = "http://stsci.edu/schemas/jwst_datamodel/specwcs_nircam_grism.schema"
     reftype = "specwcs"
 
     def __init__(self, init=None,

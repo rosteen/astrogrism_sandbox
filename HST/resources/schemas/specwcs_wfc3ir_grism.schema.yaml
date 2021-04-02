@@ -21,13 +21,21 @@ allOf:
           Nircam Grism row dispersion model, instance of astropy.modeling.Model
         type: array
         items:
-          $ref: asdf://stsci.edu/schemas/grismstuff/dispxy-1.0.schema
+          #$ref: http://stsci.edu/schemas/grismstuff/dispxy-1.0
+          #$ref: asdf://stsci.edu/schemas/grismstuff/dispxy-1.0.schema.yaml
+          #type: DISPXY_Model
+          properties:
+            inv:
+              type: bool
+            offset:
+              type: float
+          additionalProperties: true
     dispy:
         description: |
           Nircam Grism column dispersion model, instance of astropy.modeling.Model
         type: array
         items:
-          $ref: http://stsci.edu/schemas/asdf/transform/transform-1.2.0
+            $ref: http://stsci.edu/schemas/asdf/transform/transform-1.2.0
     invdispl:
         description: |
           Nircam Grism inverse wavelength dispersion model, instance of astropy.modeling.Model
