@@ -4,10 +4,10 @@ $schema: "http://stsci.edu/schemas/asdf/asdf-schema-1.0.0"
 id: "http://stsci.edu/schemas/grismstuff/specwcs_wfc3ir_grism.schema"
 title: SPECWCS_WFC3IR_GRISM reference file model
 allOf:
-- $ref: referencefile.schema
-- $ref: keyword_module.schema
-- $ref: keyword_pupil.schema
-- $ref: keyword_exptype.schema
+- $ref: http://stsci.edu/schemas/jwst_datamodel/referencefile.schema
+- $ref: http://stsci.edu/schemas/jwst_datamodel/keyword_module.schema
+- $ref: http://stsci.edu/schemas/jwst_datamodel/keyword_pupil.schema
+- $ref: http://stsci.edu/schemas/jwst_datamodel/keyword_exptype.schema
 - type: object
   properties:
     displ:
@@ -20,8 +20,8 @@ allOf:
         description: |
           Nircam Grism row dispersion model, instance of astropy.modeling.Model
         type: array
-        #items:
-        #  $ref: http://stsci.edu/schemas/asdf/transform/transform-1.2.0
+        items:
+          $ref: asdf://stsci.edu/schemas/grismstuff/dispxy-1.0.schema
     dispy:
         description: |
           Nircam Grism column dispersion model, instance of astropy.modeling.Model

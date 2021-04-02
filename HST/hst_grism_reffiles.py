@@ -11,7 +11,7 @@ from astropy.modeling.models import Polynomial1D
 #from jwst.datamodels import NIRCAMGrismModel
 from .wcs_ref_model import WFC3IRGrismModel
 from jwst.datamodels import wcs_ref_models
-from .dispersion_models import DISPXY_Model, DISPXY_Extension, add_schema
+from .dispersion_models import DISPXY_Model, DISPXY_Extension, add_schemas
 
 def common_reference_file_keywords(reftype=None,
                                    title=None,
@@ -233,7 +233,7 @@ def create_grism_specwcs(conffile="",
     # We need to register the converter for the DISPXY_Model class with asdf
     asdf.get_config().add_extension(DISPXY_Extension())
     # Also the schema
-    add_schema()
+    add_schemas()
 
 
     '''

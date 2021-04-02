@@ -27,7 +27,8 @@ class WFC3IRGrismModel(ReferenceFileModel):
           HST Grism orders, matched to the array locations of the
           dispersion models
     """
-    schema_url = "http://stsci.edu/schemas/jwst_datamodel/specwcs_nircam_grism.schema"
+    schema_url = "asdf://stsci.edu/grismstuff/specwcs_wfc3ir_grism.schema"
+    #schema_url = "http://stsci.edu/schemas/asdf/core/asdf-1.1.0"
     reftype = "specwcs"
 
     def __init__(self, init=None,
@@ -40,6 +41,8 @@ class WFC3IRGrismModel(ReferenceFileModel):
                        orders=None,
                        **kwargs):
         super(WFC3IRGrismModel, self).__init__(init=init, **kwargs)
+
+        print(self.meta)
 
         if init is None:
             self.populate_meta()

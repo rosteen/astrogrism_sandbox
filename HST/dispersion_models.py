@@ -47,9 +47,17 @@ class DISPXY_Extension():
     tags = ["tag:stsci.edu:grismstuff/dispxy_model-1.0.0"]
     #tags = ["asdf://stsci.edu/grismstuff/tags/dispxy_model-1.0"]
 
-def add_schema():
+def add_schemas():
     resource_dir = "/Users/rosteen/projects/astrogrism_sandbox/HST/resources"
+
+    # Add WCS model schema
     with open(f"{resource_dir}/schemas/specwcs_wfc3ir_grism.schema.yaml", "r") as f:
-        temp_schema = yaml.load(f)
+        temp_schema = yaml.load(f, Loader=yaml.FullLoader)
     asdf.get_config().add_resource_mapping(
         {"asdf://stsci.edu/grismstuff/specwcs_wfc3ir_grism.schema": yaml.dump(temp_schema)})
+
+    # Add dispersion model schema
+    with open(f"{resource_dir}/schemas/dispxy-1.0.schema.yaml", "r") as f:
+        temp_schema = yaml.load(f, Loader=yaml.FullLoader)
+    asdf.get_config().add_resource_mapping(
+        {"asdf://stsci.edu/grismstuff/dispxy-1.0.schema": yaml.dump(temp_schema)})
