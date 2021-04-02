@@ -1,6 +1,8 @@
 import numpy as np
+import yaml
 from astropy.modeling.models import custom_model
 from astropy.modeling import Model, Parameter
+import asdf
 from asdf.extension import Converter
 
 class DISPXY_Model(Model):
@@ -30,15 +32,24 @@ class DISPXY_ModelConverter(Converter):
 
     def to_yaml_tree(self, obj, tags, ctx):
         # ASDF will know how to turn the nested lists into yaml properly
-        return {"ematrix": obj.ematrix, "inverse_flag": obj.inv}
+        return {"ematrix": obj.ematrix, "inverse_flag": obj.inv,
+                "offset": obj.offset}
 
     def from_yaml_tree(self, node, tags, ctx):
         ematrix = node['ematrix']
         inverse_flag = node['inverse_flag']
-        return DISPXY_Model(ematrix, inverse_flag)
+        offset = node['offset']
+        return DISPXY_Model(ematrix, offset, inverse_flag)
 
 class DISPXY_Extension():
     extension_uri = "asdf://stsci.edu/grismstuff/extensions/extension-1.0"
     converters = [DISPXY_ModelConverter()]
     tags = ["tag:stsci.edu:grismstuff/dispxy_model-1.0.0"]
     #tags = ["asdf://stsci.edu/grismstuff/tags/dispxy_model-1.0"]
+
+def add_schema():
+    resource_dir = "/Users/rosteen/projects/astrogrism_sandbox/HST/resources"
+    with open(f"{resource_dir}/schemas/specwcs_wfc3ir_grism.schema.yaml", "r") as f:
+        temp_schema = yaml.load(f)
+    asdf.get_config().add_resource_mapping(
+        {"asdf://stsci.edu/grismstuff/specwcs_wfc3ir_grism.schema": yaml.dump(temp_schema)})
